@@ -16,5 +16,9 @@ DiscourseEvent.on(:topic_created) do |topic, _, user|
     tags: ['tag1', 'tag2']
   } 
 
-  raise requestBody.inspect
+  topic.update_attributes({
+    meta_data: {
+      apt_crowd_request: 'totes just a test'
+    }
+  });
 end
