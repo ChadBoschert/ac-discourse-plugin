@@ -22,3 +22,28 @@ DiscourseEvent.on(:topic_created) do |topic, _, user|
     }
   });
 end
+
+after_initialize do
+  # require 'topic_list_item_serializer'
+  #
+  # class ::TopicListItemSerializer
+  #   alias_method :_custom_fields, :custom_fields
+  #
+  #   raise TopicListItemSerializer.methods.sort.inspect
+  #
+  #   def custom_fields
+  #     if object.custom_fields["apt_crowd_request"]
+  #       object.custom_fields["apt_crowd_request"] = ""
+  #       object.svae
+  #     end
+  #     
+  #     _custom_fields
+  #   end
+  # end
+
+  add_to_serializer(:topic_view, :apt_crowd_request) do 
+    if object.topic.custom_fields.key?("apt_crowd_request")
+      return object.topic.custom_fields["apt_crowd_request"]
+    end
+  end
+end
