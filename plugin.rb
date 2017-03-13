@@ -28,7 +28,7 @@ end
 after_initialize do
   add_to_serializer(:topic_view, :apt_crowd_request) do 
     if object.topic.custom_fields.key?("apt_crowd_request")
-      return object.topic.custom_fields["apt_crowd_request"]
+      return JSON.parse(object.topic.custom_fields["apt_crowd_request"])
     end
   end
 end
