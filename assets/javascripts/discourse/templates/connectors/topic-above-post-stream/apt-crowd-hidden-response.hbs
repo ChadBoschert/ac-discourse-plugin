@@ -1,5 +1,5 @@
 <div style="display:none;" id="apt-crowd-response-display">
-  <h1>Explore these options while you wait</h1>
+  <h1 class="ac-header">Explore these options while you wait for responses...</h1>
   <div class="ac-options">
     <div class="ac-posts">
       <h2>{{ model.apt_crowd_request.posts.length }} Posts</h2>
@@ -9,7 +9,7 @@
         {{#each model.apt_crowd_request.posts as |post|}}
           <li>
             <h3>{{post.title}}</h3>
-            <p>{{post.preview_html}}</p>
+            <p>{{{post.preview_html}}}</p>
             <a target="_blank" href={{post.post_url}}>View Post</a>
           </li>
         {{/each}}
@@ -46,9 +46,8 @@
           <li>
             <img src="{{vendor.logo_url}}"/>
             <h3>{{vendor.name}}</h3>
-            <p>{{vendor.preview_html}}</p>
+            <p>{{{vendor.preview_html}}}</p>
             <a target="_blank" href="{{vendor.website}}">View Website</a>
-            <a target="_blank" href="#">Send Message</a>
             <a target="_blank" href="#">Contact Vendor</a>
           </li>
         {{/each}}

@@ -1,0 +1,29 @@
+h1.ac-header {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.ac-posts, .ac-peers, .ac-vendors {
+  width: 32%;
+  display: inline-block;
+  float: left;
+
+  ul {
+    list-style-type:none;
+    margin: 0;
+  }
+
+  li {
+    border: 2px solid black;
+    padding: 3px;
+    margin-bottom: 5px;
+  }
+
+  a {
+    display: block;
+  }
+}
+
+.ac-peers, .ac-vendors {
+  margin-left: 2%;
+}

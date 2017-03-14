@@ -5,6 +5,8 @@
 
 require 'json'
 
+register_asset "stylesheets/apt-crowd.scss"
+
 DiscourseEvent.on(:topic_created) do |topic, _, user|
   post = topic.first_post;
 
