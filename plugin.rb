@@ -12,7 +12,7 @@ PLUGIN_NAME ||= "apt_crowd".freeze
 
 after_initialize do
   DiscourseEvent.on(:topic_created) do |topic, _, user|
-    post = topic.first_post;
+    post = topic.first_post
 
     requestBody = {
       title: topic.title,
@@ -24,11 +24,8 @@ after_initialize do
       tags: ['tag1', 'tag2']
     } 
 
-    topic.update_attributes({
-      meta_data: {
-        apt_crowd_request: FakeResponse.api
-      }
-    });
+    topic.meta_data[:apt_crowd_request] = FakeResponse.api
+    topic.save
   end
 
   add_to_serializer(:topic_view, :apt_crowd_request) do 
