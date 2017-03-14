@@ -23,7 +23,11 @@ function initializeDetails(api) {
     var $aptCrowdResponse = $('#apt-crowd-response-display');
 
     if ($aptCrowdResponse.length > 0) {
-      bootbox.alert($aptCrowdResponse.html());
+      var topicId = $aptCrowdResponse.data('topic-id');
+
+      bootbox.alert($aptCrowdResponse.html(), function() {
+        $.post('/apt_crowd/silence/' + topicId)
+      });
     }
   });
 }

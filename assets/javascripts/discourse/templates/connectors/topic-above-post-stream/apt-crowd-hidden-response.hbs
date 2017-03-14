@@ -1,57 +1,59 @@
-<div style="display:none;" id="apt-crowd-response-display">
-  <h1 class="ac-header">Explore these options while you wait for responses...</h1>
-  <div class="ac-options">
-    <div class="ac-posts">
-      <h2>{{ model.apt_crowd_request.posts.length }} Posts</h2>
-      <p>Discuss related topics</p>
+{{#unless model.apt_crowd_request_seen }}
+  <div style="display:none;" data-topic-id="{{model.id}}" id="apt-crowd-response-display">
+    <h1 class="ac-header">Explore these options while you wait for responses...</h1>
+    <div class="ac-options">
+      <div class="ac-posts">
+        <h2>{{ model.apt_crowd_request.posts.length }} Posts</h2>
+        <p>Discuss related topics</p>
 
-      <ul>
-        {{#each model.apt_crowd_request.posts as |post|}}
-          <li>
-            <h3>{{post.title}}</h3>
-            <p>{{{post.preview_html}}}</p>
-            <a target="_blank" href={{post.post_url}}>View Post</a>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+        <ul>
+          {{#each model.apt_crowd_request.posts as |post|}}
+            <li>
+              <h3>{{post.title}}</h3>
+              <p>{{{post.preview_html}}}</p>
+              <a target="_blank" href={{post.post_url}}>View Post</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
 
-    <div class="ac-peers">
-      <h2>{{ model.apt_crowd_request.peers.length }} Peers</h2>
-      <p>May have relevant experience</p>
+      <div class="ac-peers">
+        <h2>{{ model.apt_crowd_request.peers.length }} Peers</h2>
+        <p>May have relevant experience</p>
 
-      <ul>
-        {{#each model.apt_crowd_request.peers as |peer|}}
-          <li>
-            <img src="{{peer.avatar_url}}"/>
-            <h3>{{peer.author}}</h3>
-            <p>
-              {{#each peer.skills as |skill|}}
-                {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
-              {{/each}}
-            </p>
-            <a target="_blank" href="#">View Posts</a>
-            <a target="_blank" href="#">Send Message</a>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
+        <ul>
+          {{#each model.apt_crowd_request.peers as |peer|}}
+            <li>
+              <img src="{{peer.avatar_url}}"/>
+              <h3>{{peer.author}}</h3>
+              <p>
+                {{#each peer.skills as |skill|}}
+                  {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
+                {{/each}}
+              </p>
+              <a target="_blank" href="#">View Posts</a>
+              <a target="_blank" href="#">Send Message</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
 
-    <div class="ac-vendors">
-      <h2>{{ model.apt_crowd_request.vendors.length }} Vendors</h2>
-      <p>May be able to help</p>
+      <div class="ac-vendors">
+        <h2>{{ model.apt_crowd_request.vendors.length }} Vendors</h2>
+        <p>May be able to help</p>
 
-      <ul>
-        {{#each model.apt_crowd_request.vendors as |vendor|}}
-          <li>
-            <img src="{{vendor.logo_url}}"/>
-            <h3>{{vendor.name}}</h3>
-            <p>{{{vendor.preview_html}}}</p>
-            <a target="_blank" href="{{vendor.website}}">View Website</a>
-            <a target="_blank" href="#">Contact Vendor</a>
-          </li>
-        {{/each}}
-      </ul>
+        <ul>
+          {{#each model.apt_crowd_request.vendors as |vendor|}}
+            <li>
+              <img src="{{vendor.logo_url}}"/>
+              <h3>{{vendor.name}}</h3>
+              <p>{{{vendor.preview_html}}}</p>
+              <a target="_blank" href="{{vendor.website}}">View Website</a>
+              <a target="_blank" href="#">Contact Vendor</a>
+            </li>
+          {{/each}}
+        </ul>
+      </div>
     </div>
   </div>
-</div>
+{{/unless}}

@@ -21,7 +21,7 @@ module FakeResponse
       ],
       'peers' => [
           {
-              'author' => 'Beth Chamberlain',
+              'author' => 'Wilt Chamberlain',
               'author_id' => '123',
               'skills' => ['Laundry', 'Folding', 'DIY'],
               'avatar_url' => '#'
