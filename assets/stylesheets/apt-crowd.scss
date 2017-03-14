@@ -27,3 +27,19 @@ h1.ac-header {
 .ac-peers, .ac-vendors {
   margin-left: 2%;
 }
+
+.ac-peers {
+  img, h3 {
+    float: left;
+  }
+
+  p {
+    clear: both;
+  }
+}
+
+.ac-vendors {
+  img {
+    width: 100%;
+  }
+}
