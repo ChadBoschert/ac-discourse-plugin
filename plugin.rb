@@ -7,10 +7,17 @@ require 'json'
 require_relative 'lib/api_wrapper'
 
 register_asset "stylesheets/apt-crowd.scss"
+enabled_site_setting :apt_crowd_api_username
+enabled_site_setting :apt_crowd_api_password
 
 PLUGIN_NAME ||= "apt_crowd".freeze
 
 after_initialize do
+  aptCrowdApi = AptCrowd::ApiWrapper.new(
+    SiteSetting.apt_crowd_api_username, 
+    SiteSetting.apt_crowd_api_password
+  )
+
   DiscourseEvent.on(:topic_created) do |topic, _, user|
     post = topic.first_post
 
@@ -24,7 +31,7 @@ after_initialize do
       tags: topic.tags.map(&:name)
     } 
 
-    topic.meta_data[:apt_crowd_request] = AptCrowd::ApiWrapper.ask requestBody
+    topic.meta_data[:apt_crowd_request] = aptCrowdApi.ask(requestBody)
     topic.save
   end
 

@@ -2,7 +2,14 @@ require 'net/http'
 
 module AptCrowd
   class ApiWrapper
+    attr_accessor :username, :password
+
     AC_URI = URI('http://aptcrowd.pythonanywhere.com/ask/')
+
+    def initialize username, password
+      @username = username
+      @password = password
+    end
 
     ##### Sample Request Body #####
     # requestBody = {
@@ -15,9 +22,9 @@ module AptCrowd
     #   "tags" => ["home","laundry"]
     # }
     
-    def self.ask requestBody
+    def ask requestBody
       request = Net::HTTP::Post.new(AC_URI, 'Content-Type' => 'application/json')
-      request.basic_auth 'admin', 'secret' #TODO add as setting
+      request.basic_auth username, password
       request.body = requestBody.to_json
 
       response = Net::HTTP.start(AC_URI.hostname, AC_URI.port) do |http|
