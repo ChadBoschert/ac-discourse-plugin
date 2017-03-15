@@ -4,7 +4,7 @@
 # authors: David Hahn
 
 require 'json'
-require_relative 'fake_response'
+require_relative 'lib/api_wrapper'
 
 register_asset "stylesheets/apt-crowd.scss"
 
@@ -17,14 +17,14 @@ after_initialize do
     requestBody = {
       title: topic.title,
       message_body: post.raw,
-      category_id: topic.category_id,
-      author_id: topic.user_id,
-      post_id: post.id,
-      topic_id: topic.id,
+      category_id: topic.category_id.to_s,
+      author_id: topic.user_id.to_s,
+      post_id: post.id.to_s,
+      topic_id: topic.id.to_s,
       tags: ['tag1', 'tag2']
     } 
 
-    topic.meta_data[:apt_crowd_request] = FakeResponse.api
+    topic.meta_data[:apt_crowd_request] = AptCrowd::ApiWrapper.ask requestBody
     topic.save
   end
 
