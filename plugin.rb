@@ -21,7 +21,7 @@ after_initialize do
       author_id: topic.user_id.to_s,
       post_id: post.id.to_s,
       topic_id: topic.id.to_s,
-      tags: ['tag1', 'tag2']
+      tags: topic.tags.map(&:name)
     } 
 
     topic.meta_data[:apt_crowd_request] = AptCrowd::ApiWrapper.ask requestBody
