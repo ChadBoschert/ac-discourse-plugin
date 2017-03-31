@@ -7,6 +7,7 @@ require 'json'
 require_relative 'lib/api_wrapper'
 
 register_asset "stylesheets/apt-crowd.scss"
+enabled_site_setting :apt_crowd_api_uri
 enabled_site_setting :apt_crowd_api_username
 enabled_site_setting :apt_crowd_api_password
 
@@ -14,6 +15,7 @@ PLUGIN_NAME ||= "apt_crowd".freeze
 
 after_initialize do
   aptCrowdApi = AptCrowd::ApiWrapper.new(
+    SiteSetting.apt_crowd_api_uri,
     SiteSetting.apt_crowd_api_username, 
     SiteSetting.apt_crowd_api_password
   )
