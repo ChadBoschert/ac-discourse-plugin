@@ -1,7 +1,7 @@
 # name: discourse-apt-crowd
 # about: Integration with apt-crowd api
-# version: 0.0.1
-# authors: David Hahn
+# version: 0.0.2
+# authors: David Hahn, Chad Boschert
 
 require 'json'
 require_relative 'lib/api_wrapper'
