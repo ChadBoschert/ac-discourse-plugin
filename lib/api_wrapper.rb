@@ -1,4 +1,5 @@
 require 'net/http'
+require 'net/https'
 
 module AptCrowd
   class ApiWrapper
@@ -28,9 +29,9 @@ module AptCrowd
       request.basic_auth username, password
       request.body = requestBody.to_json
 
-      response = Net::HTTP.start(askuri.hostname, askuri.port) do |http|
-        http.request(request)
-      end
+      http = Net::HTTP.new(askuri.hostname, askuri.port)
+      http.use_ssl = true
+      response = http.start{|http| http.request(request)}
 
       return JSON.parse(response.body)
     end
