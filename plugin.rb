@@ -44,8 +44,7 @@ after_initialize do
   end
 
   add_to_serializer(:topic_view, :apt_crowd_request_seen) do 
-    if 
-       (object.guardian.user && object.topic.user.id != object.guardian.user.id) ||
+    if (object.guardian.user && object.topic.user.id != object.guardian.user.id) ||
        !object.topic.custom_fields.key?("apt_crowd_request") ||
        object.topic.custom_fields.key?("apt_crowd_request_seen")
       return true
