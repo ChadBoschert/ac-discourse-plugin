@@ -28,7 +28,7 @@
               <h3>{{peer.name}}</h3>
               <p>
                 {{#each peer.skills as |skill|}}
-                  {{skill[0]}} ({{skill[1]}}){{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
+                  {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
                 {{/each}}
               </p>
               <a target="_blank" href="#">View Posts</a>
