@@ -25,7 +25,7 @@
           {{#each model.apt_crowd_request.peers as |peer|}}
             <li>
               <img src="{{peer.avatar_url}}"/>
-              <h3>{{peer.name}}</h3>
+              <h3>{{peer.author}}</h3>
               <p>
                 {{#each peer.skills as |skill|}}
                   {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
