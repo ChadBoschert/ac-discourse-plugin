@@ -3,8 +3,8 @@
     <h1 class="ac-header">Explore these options while you wait for responses...</h1>
     <div class="ac-options">
       <div class="ac-posts">
-        <h2>{{ model.apt_crowd_request.posts.length }} Posts</h2>
-        <p>Discuss related topics</p>
+        <h2>{{ model.apt_crowd_request.posts.length }} Conversations</h2>
+        <p>discuss related topics</p>
 
         <ul>
           {{#each model.apt_crowd_request.posts as |post|}}
@@ -18,8 +18,8 @@
       </div>
 
       <div class="ac-peers">
-        <h2>{{ model.apt_crowd_request.peers.length }} Peers</h2>
-        <p>May have relevant experience</p>
+        <h2>{{ model.apt_crowd_request.peers.length }} Experts</h2>
+        <p>have relevant experience</p>
 
         <ul>
           {{#each model.apt_crowd_request.peers as |peer|}}
@@ -39,8 +39,8 @@
       </div>
 
       <div class="ac-vendors">
-        <h2>{{ model.apt_crowd_request.vendors.length }} Vendors</h2>
-        <p>May be able to help</p>
+        <h2>{{ model.apt_crowd_request.vendors.length }} Partners</h2>
+        <p>are able to help</p>
 
         <ul>
           {{#each model.apt_crowd_request.vendors as |vendor|}}

@@ -1,5 +1,5 @@
 h1.ac-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 15px;
 }
 
@@ -14,9 +14,12 @@ h1.ac-header {
   }
 
   li {
-    border: 2px solid black;
-    padding: 3px;
+    border: 2px solid #eee;
+    padding: 3px 1em;
     margin-bottom: 5px;
+    text-align: justify;
+    
+    h3: { text-align: left; }
   }
 
   a {
@@ -40,6 +43,11 @@ h1.ac-header {
 
 .ac-vendors {
   img {
-    width: 100%;
+    max-width: 100%;
   }
+}
+
+div.bootbox.modal {
+  width: 80%;
+  margin: -250px 0 0 -40%;
 }
