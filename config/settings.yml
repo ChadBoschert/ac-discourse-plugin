@@ -1,10 +1,8 @@
 plugins:
   apt_crowd_api_uri:
-    default: ""
-    client: false  
+    default: "http://aptcrowd.pythonanywhere.com/"
+    client: true  
   apt_crowd_api_username:
-    default: ""
-    client: false
+    client: true
   apt_crowd_api_password:
-    default: ""
-    client: false
+    client: true

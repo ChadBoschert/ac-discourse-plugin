@@ -14,6 +14,7 @@ enabled_site_setting :apt_crowd_api_password
 PLUGIN_NAME ||= "apt_crowd".freeze
 
 after_initialize do
+  Mime::Type.register "image/svg+xml", :svg
   aptCrowdApi = AptCrowd::ApiWrapper.new(
     SiteSetting.apt_crowd_api_uri,
     SiteSetting.apt_crowd_api_username, 
@@ -55,6 +56,13 @@ after_initialize do
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
       isolate_namespace AptCrowd
+      
+      if Rails.env.production?
+        Dir[Rails.root.join("plugins/discourse-plugin-aptcrowd/public/images/*")].each do |src|
+          dest = Rails.root.join("public/images/#{File.basename(src)}")
+          File.symlink(src, dest) if !File.exists?(dest)
+        end
+      end
     end
   end
 

@@ -1,58 +1,63 @@
 {{#unless model.apt_crowd_request_seen }}
-  <div style="display:none;" data-topic-id="{{model.id}}" id="apt-crowd-response-display">
-    <h1 class="ac-header">Explore these options while you wait for responses...</h1>
-    <div class="ac-options">
-      <div class="ac-posts">
-        <h2>{{ model.apt_crowd_request.posts.length }} Conversations</h2>
-        <p>discuss related topics</p>
-
-        <ul>
-          {{#each model.apt_crowd_request.posts as |post|}}
-            <li>
-              <h3>{{post.title}}</h3>
-              <p>{{{post.preview_html}}}</p>
-              <a target="_blank" href={{post.post_url}}>View Post</a>
-            </li>
-          {{/each}}
-        </ul>
+  <div style="display: none;" data-topic-id="{{model.id}}" id="apt-crowd-response-display">
+    <div class="tabbed-container">
+      <div style="position: relative;" class="ac-header">
+        <h1>Explore these options while you wait for responses:</h1>
       </div>
+      <input type="radio" name="tab" value="posts" id="placeholder-tab-posts" checked>
+      <input type="radio" name="tab" value="peers" id="placeholder-tab-peers">
+      <input type="radio" name="tab" value="partners" id="placeholder-tab-partners">
+      <label for="placeholder-tab-posts"><img src="/images/ac-bubble.svg" /><span class="title">{{ model.apt_crowd_request.posts.length }} Posts</span><span class="sub">discuss related topics:</span></label>
+      <label for="placeholder-tab-peers"><img src="/images/ac-avatar.svg" /><span class="title">{{ model.apt_crowd_request.peers.length }} Peers</span><span class="sub">may have relevant experience:</span></label>
+      <label for="placeholder-tab-partners"><img src="/images/ac-globe.svg" /><span class="title">{{ model.apt_crowd_request.vendors.length }} Partners</span><span class="sub">may be able to help:</span></label>
+      <div class="results-container">
+        <div class="results">
 
-      <div class="ac-peers">
-        <h2>{{ model.apt_crowd_request.peers.length }} Experts</h2>
-        <p>have relevant experience</p>
+          <!-- POSTS -->
+          <div class="results-posts">
+            {{#each model.apt_crowd_request.posts as |post|}}
+              <div class="result">  
+                <h3>{{post.title}}</h3>
+                <p>{{{post.preview_html}}}</p>
+                <a class="btn btn-primary" target="_blank" href={{post.post_url}}>View Post</a>
+              </div>
+            {{/each}}
+          </div>
+          <!-- /POSTS -->
+          
+          <!-- PEERS -->
+          <div class="results-peers">
+            {{#each model.apt_crowd_request.peers as |peer|}}
+              <div class="result">
+                <img src="{{peer.avatar_url}}"/>
+                <h3>{{peer.author}}</h3>
+                <p>
+                  {{#each peer.skills as |skill|}}
+                    {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
+                  {{/each}}
+                </p>
+                <a class="btn btn-primary" target="_blank" href="#">View Posts</a><br />
+                <a target="_blank" href="#">Send Message</a>
+              </div>
+            {{/each}}
+          </div>
+          <!-- /PEERS -->
 
-        <ul>
-          {{#each model.apt_crowd_request.peers as |peer|}}
-            <li>
-              <img src="{{peer.avatar_url}}"/>
-              <h3>{{peer.author}}</h3>
-              <p>
-                {{#each peer.skills as |skill|}}
-                  {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
-                {{/each}}
-              </p>
-              <a target="_blank" href="#">View Posts</a>
-              <a target="_blank" href="#">Send Message</a>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
+          <!-- PARTNERS -->
+          <div class="results-partners">
+            {{#each model.apt_crowd_request.vendors as |vendor|}}
+              <div class="result">
+                <img src="{{vendor.logo_url}}"/>
+                <h3>{{vendor.name}}</h3>
+                <p>{{{vendor.preview_html}}}</p>
+                <a class="btn btn-primary" arget="_blank" href="{{vendor.website}}">View Website</a><br />
+                <a target="_blank" href="#">Contact Vendor</a>
+              </div>
+            {{/each}}
+          </div>
+          <!-- /PARTNERS -->
 
-      <div class="ac-vendors">
-        <h2>{{ model.apt_crowd_request.vendors.length }} Partners</h2>
-        <p>are able to help</p>
-
-        <ul>
-          {{#each model.apt_crowd_request.vendors as |vendor|}}
-            <li>
-              <img src="{{vendor.logo_url}}"/>
-              <h3>{{vendor.name}}</h3>
-              <p>{{{vendor.preview_html}}}</p>
-              <a target="_blank" href="{{vendor.website}}">View Website</a>
-              <a target="_blank" href="#">Contact Vendor</a>
-            </li>
-          {{/each}}
-        </ul>
+        </div>
       </div>
     </div>
   </div>

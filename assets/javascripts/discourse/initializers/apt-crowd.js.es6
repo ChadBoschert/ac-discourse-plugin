@@ -25,7 +25,9 @@ function initializeDetails(api) {
     if ($aptCrowdResponse.length > 0) {
       var topicId = $aptCrowdResponse.data('topic-id');
 
-      bootbox.alert($aptCrowdResponse.html(), function() {
+      var $responseNoPlaceholder = $aptCrowdResponse.html().replace(/\placeholder-tab-/g,"tab-");
+
+      bootbox.alert($responseNoPlaceholder, function() {
         $.post('/apt_crowd/silence/' + topicId)
       });
     }
