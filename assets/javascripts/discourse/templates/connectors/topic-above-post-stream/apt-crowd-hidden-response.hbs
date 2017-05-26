@@ -1,5 +1,18 @@
 {{#unless model.apt_crowd_request_seen }}
   <div style="display: none;" data-topic-id="{{model.id}}" id="apt-crowd-response-display">
+    <script>
+      jQuery(window).load(function () {
+        // Internet Explorer 6-11
+        var isIE = /*@cc_on!@*/false || !!document.documentMode;
+        // Edge 20+
+        var isEdge = !isIE && !!window.StyleMedia;
+        if (isIE || isEdge) {
+          jQuery('.ac-icon').each(function (ndx) {
+            jQuery(this).addClass('fallback');
+          });
+        }
+      });
+    </script>
     <div class="tabbed-container">
       <div style="position: relative;" class="ac-header">
         <h1>Explore these options while you wait for responses:</h1>
@@ -7,9 +20,9 @@
       <input type="radio" name="tab" value="posts" id="placeholder-tab-posts" checked>
       <input type="radio" name="tab" value="peers" id="placeholder-tab-peers">
       <input type="radio" name="tab" value="partners" id="placeholder-tab-partners">
-      <label for="placeholder-tab-posts"><img src="/images/ac-bubble.svg" /><span class="title">{{ model.apt_crowd_request.posts.length }} Posts</span><span class="sub">discuss related topics:</span></label>
-      <label for="placeholder-tab-peers"><img src="/images/ac-avatar.svg" /><span class="title">{{ model.apt_crowd_request.peers.length }} Peers</span><span class="sub">may have relevant experience:</span></label>
-      <label for="placeholder-tab-partners"><img src="/images/ac-globe.svg" /><span class="title">{{ model.apt_crowd_request.vendors.length }} Partners</span><span class="sub">may be able to help:</span></label>
+      <label for="placeholder-tab-posts"><span class="ac-icon posts"></span><span class="title">{{ model.apt_crowd_request.posts.length }} Posts</span><span class="sub">discuss related topics:</span></label>
+      <label for="placeholder-tab-peers"><span class="ac-icon peers"></span><span class="title">{{ model.apt_crowd_request.peers.length }} Peers</span><span class="sub">may have relevant experience:</span></label>
+      <label for="placeholder-tab-partners"><span class="ac-icon partners"></span><span class="title">{{ model.apt_crowd_request.vendors.length }} Partners</span><span class="sub">may be able to help:</span></label>
       <div class="results-container">
         <div class="results">
 
