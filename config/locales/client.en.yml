@@ -1,0 +1,9 @@
+en:
+  js:
+    ac_dialog:
+      title: "Check these while you wait..."
+      ok_button: "OK"
+      show_post_label: "View Post"
+      show_user_activity_label: "View Posts"
+      invite_peer_label: "Invite to Topic"
+      contact_vendor_label: "Request Info"

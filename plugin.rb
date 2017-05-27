@@ -1,6 +1,6 @@
 # name: discourse-apt-crowd
 # about: Integration with apt-crowd api
-# version: 0.0.5
+# version: 0.0.6
 # authors: David Hahn, Chad Boschert
 
 require 'json'
@@ -21,20 +21,22 @@ after_initialize do
   )
 
   DiscourseEvent.on(:topic_created) do |topic, _, user|
-    post = topic.first_post
+    if topic.archetype == "regular"
+      post = topic.first_post
+  
+      requestBody = {
+        title: topic.title,
+        message_body: post.raw,
+        category_id: topic.category_id.to_s,
+        author_id: topic.user_id.to_s,
+        post_id: post.id.to_s,
+        topic_id: topic.id.to_s,
+        tags: topic.tags.map(&:name)
+      } 
 
-    requestBody = {
-      title: topic.title,
-      message_body: post.raw,
-      category_id: topic.category_id.to_s,
-      author_id: topic.user_id.to_s,
-      post_id: post.id.to_s,
-      topic_id: topic.id.to_s,
-      tags: topic.tags.map(&:name)
-    } 
-
-    topic.meta_data[:apt_crowd_request] = aptCrowdApi.ask(requestBody)
-    topic.save
+      topic.meta_data[:apt_crowd_request] = aptCrowdApi.ask(requestBody)
+      topic.save
+    end
   end
 
   add_to_serializer(:topic_view, :apt_crowd_request) do 
@@ -71,10 +73,30 @@ after_initialize do
 
       render json: true
     end
+
+    def invite
+      topic = Topic.find(params[:topic_id])
+      user = User.find(params[:user_id])
+
+      changes = { raw: topic.first_post.raw + "\n@" + user.username }
+      opts = { bypass_rate_limiter: true }
+      revisor = PostRevisor.new(topic.first_post, topic)
+      revisor.revise!(current_user, changes, opts)
+
+      render json: { invited: true, topic_id: topic.id, user: user } 
+    end
+
+    def lookup_user
+      user = User.find(params[:user_id])
+      
+      render json: user
+    end
   end
 
   AptCrowd::Engine.routes.draw do
     post "/silence/:topic_id" => 'requests#silence'
+    post "/invite/:topic_id" => 'requests#invite'
+    post "/lookup-user/:user_id" => 'requests#lookup_user'
   end
 
   Discourse::Application.routes.append do

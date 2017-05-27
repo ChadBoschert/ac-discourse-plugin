@@ -1,8 +1,6 @@
-{{#unless model.apt_crowd_request_seen }}
-  <div style="display:none;" data-topic-id="{{model.id}}" id="apt-crowd-response-display">
+{{#d-modal-body id="invite-modal" title=title}}
     <h1 class="ac-header">Explore these options while you wait for responses...</h1>
-    <p>test 1</p>
-    <pre>{{ model.first_post.raw }}</pre>
+
     <div class="ac-options">
       <div class="ac-posts">
         <h2>{{ model.apt_crowd_request.posts.length }} Conversations</h2>
@@ -13,7 +11,7 @@
             <li>
               <h3>{{post.title}}</h3>
               <p>{{{post.preview_html}}}</p>
-              <a target="_blank" href={{post.post_url}}>View Post</a>
+              {{d-button action="show_post" label="ac_dialog.show_post_label" actionParam=post.post_url}}
             </li>
           {{/each}}
         </ul>
@@ -33,8 +31,9 @@
                   {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
                 {{/each}}
               </p>
-              <a target="_blank" href="#">View Posts</a>
               <a target="_blank" href="/apt_crowd">Invite to Topic</a>
+              {{d-button action="show_activity" label="ac_dialog.show_user_activity_label" actionParam=peer.author_id}}
+              <button class="btn" {{action "invite_peer" model.id peer.author_id}}>Invite to Topic</button>
             </li>
           {{/each}}
         </ul>
@@ -57,5 +56,8 @@
         </ul>
       </div>
     </div>
-  </div>
-{{/unless}}
+{{/d-modal-body}}
+
+<div class="modal-footer">
+  {{d-button action="silence" label="ac_dialog.ok_button" actionParam=model.id}}
+</div>
