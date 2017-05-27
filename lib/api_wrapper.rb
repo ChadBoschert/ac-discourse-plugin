@@ -29,8 +29,11 @@ module AptCrowd
       request.basic_auth username, password
       request.body = requestBody.to_json
 
+      # response = Net::HTTP.start(askuri.hostname, askuri.port) do |http|
+      #   http.request(request)
+      # end
       http = Net::HTTP.new(askuri.hostname, askuri.port)
-      http.use_ssl = true
+      http.use_ssl = askuri.scheme.downcase == "https"
       response = http.start{|http| http.request(request)}
 
       return JSON.parse(response.body)
