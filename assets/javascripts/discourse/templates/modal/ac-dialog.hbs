@@ -1,59 +1,58 @@
-{{#d-modal-body id="invite-modal" title=title}}
-    <h1 class="ac-header">Explore these options while you wait for responses...</h1>
+{{#d-modal-body id="suggestions-modal" title=title}}
+    <div class="tabbed-container">
+      <input type="radio" name="tab" value="posts" id="tab-posts" checked>
+      <input type="radio" name="tab" value="peers" id="tab-peers">
+      <input type="radio" name="tab" value="partners" id="tab-partners">
+      <label for="tab-posts"><span class="ac-icon posts"></span><span class="title">{{ model.apt_crowd_request.posts.length }} Posts</span><span class="sub">discuss related topics:</span></label>
+      <label for="tab-peers"><span class="ac-icon peers"></span><span class="title">{{ model.apt_crowd_request.peers.length }} Peers</span><span class="sub">may have experience:</span></label>
+      <label for="tab-partners"><span class="ac-icon partners"></span><span class="title">{{ model.apt_crowd_request.vendors.length }} Partners</span><span class="sub">may be able to help:</span></label>
+      <div class="results-container">
+        <div class="results">
+          <!-- POSTS -->
+          <div class="results-posts">
+            {{#each model.apt_crowd_request.posts as |post|}}
+              <div class="result">  
+                <h3>{{post.title}}</h3>
+                <p>{{{post.preview_html}}}</p>
+                {{d-button action="show_post" label="ac_dialog.show_post_label" actionParam=post.post_url class="btn btn-primary"}}
+              </div>
+            {{/each}}
+          </div>
+          <!-- /POSTS -->
+          
+          <!-- PEERS -->
+          <div class="results-peers">
+            {{#each model.apt_crowd_request.peers as |peer|}}
+              <div class="result">
+                <img src="{{peer.avatar_url}}"/>
+                <h3>{{peer.author}}</h3>
+                <p>
+                  {{#each peer.skills as |skill|}}
+                    {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
+                  {{/each}}
+                </p>
+                {{d-button action="show_activity" label="ac_dialog.show_user_activity_label" actionParam=peer.author_id class="btn btn-primary"}}
+                <a {{action "invite_peer" model.id peer.author_id}}>Invite to Topic</a>
+              </div>
+            {{/each}}
+          </div>
+          <!-- /PEERS -->
 
-    <div class="ac-options">
-      <div class="ac-posts">
-        <h2>{{ model.apt_crowd_request.posts.length }} Conversations</h2>
-        <p>discuss related topics</p>
-
-        <ul>
-          {{#each model.apt_crowd_request.posts as |post|}}
-            <li>
-              <h3>{{post.title}}</h3>
-              <p>{{{post.preview_html}}}</p>
-              {{d-button action="show_post" label="ac_dialog.show_post_label" actionParam=post.post_url}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-
-      <div class="ac-peers">
-        <h2>{{ model.apt_crowd_request.peers.length }} Experts</h2>
-        <p>have relevant experience</p>
-
-        <ul>
-          {{#each model.apt_crowd_request.peers as |peer|}}
-            <li>
-              <img src="{{peer.avatar_url}}"/>
-              <h3>{{peer.author}}</h3>
-              <p>
-                {{#each peer.skills as |skill|}}
-                  {{skill}}{{#unless (eq skill peer.skills.lastObject)}},{{/unless}}
-                {{/each}}
-              </p>
-              <a target="_blank" href="/apt_crowd">Invite to Topic</a>
-              {{d-button action="show_activity" label="ac_dialog.show_user_activity_label" actionParam=peer.author_id}}
-              <button class="btn" {{action "invite_peer" model.id peer.author_id}}>Invite to Topic</button>
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-
-      <div class="ac-vendors">
-        <h2>{{ model.apt_crowd_request.vendors.length }} Partners</h2>
-        <p>are able to help</p>
-
-        <ul>
-          {{#each model.apt_crowd_request.vendors as |vendor|}}
-            <li>
-              <img src="{{vendor.logo_url}}"/>
-              <h3>{{vendor.name}}</h3>
-              <p>{{{vendor.preview_html}}}</p>
-              <a target="_blank" href="{{vendor.website}}">View Website</a>
-              <a target="_blank" href="#">Contact Vendor</a>
-            </li>
-          {{/each}}
-        </ul>
+          <!-- PARTNERS -->
+          <div class="results-partners">
+            {{#each model.apt_crowd_request.vendors as |vendor|}}
+              <div class="result">
+                <img src="{{vendor.logo_url}}"/>
+                <h3>{{vendor.name}}</h3>
+                <p>{{{vendor.preview_html}}}</p>
+                {{d-button action="contact_vendor" label="ac_dialog.contact_vendor_label" actionParam=vendor class="btn btn-primary"}}
+                <a target="_blank" href="{{vendor.website}}">View Website</a>
+                
+              </div>
+            {{/each}}
+          </div>
+          <!-- /PARTNERS -->
+        </div>
       </div>
     </div>
 {{/d-modal-body}}

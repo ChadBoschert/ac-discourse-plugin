@@ -1,7 +1,7 @@
 en:
   js:
     ac_dialog:
-      title: "Check these while you wait..."
+      title: "Explore these options while you wait for responses"
       ok_button: "OK"
       show_post_label: "View Post"
       show_user_activity_label: "View Posts"

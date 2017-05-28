@@ -59,12 +59,12 @@ after_initialize do
       engine_name PLUGIN_NAME
       isolate_namespace AptCrowd
       
-      if Rails.env.production?
-        Dir[Rails.root.join("plugins/discourse-plugin-aptcrowd/public/images/*")].each do |src|
-          dest = Rails.root.join("public/images/#{File.basename(src)}")
-          File.symlink(src, dest) if !File.exists?(dest)
-        end
+
+      Dir[Rails.root.join("plugins/discourse-plugin-aptcrowd/public/images/*")].each do |src|
+        dest = Rails.root.join("public/images/#{File.basename(src)}")
+        File.symlink(src, dest) if !File.exists?(dest)
       end
+
     end
   end
 
