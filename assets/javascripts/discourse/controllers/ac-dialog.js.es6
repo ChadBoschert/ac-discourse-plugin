@@ -2,10 +2,10 @@ import { ajax } from 'discourse/lib/ajax';
 
 export default Ember.Controller.extend({
   actions: {
-    show_post(url) { 
+    show_post(post_id) { 
       // TODO: Find a better way to route to a post w/o 
       // Expects /p/<post_id>
-      window.open(url);
+      window.open('/p/' + post_id);
     },
     show_activity(user_id) {
       console.log(user_id)

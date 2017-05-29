@@ -26,13 +26,16 @@ after_initialize do
       post = topic.first_post
   
       requestBody = {
-        title: topic.title,
-        message_body: post.raw,
-        category_id: topic.category_id.to_s,
-        author_id: topic.user_id.to_s,
-        post_id: post.id.to_s,
-        topic_id: topic.id.to_s,
-        tags: topic.tags.map(&:name)
+	convo_srcid: topic.id.to_s,
+        post_srcid: post.id.to_s,
+        subject: topic.title,
+        body: post.raw,
+        category_srcid: topic.category_id.to_s,
+	category: topic.category.name,
+        author_srcid: topic.user_id.to_s,
+	author_name: topic.user.name,
+	author_email: topic.user.email,
+	post_timestamp_utc: topic.created_at.utc
       } 
 
       topic.meta_data[:apt_crowd_request] = aptCrowdApi.ask(requestBody)

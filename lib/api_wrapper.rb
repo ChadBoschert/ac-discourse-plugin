@@ -12,17 +12,6 @@ module AptCrowd
       @username = username
       @password = password
     end
-
-    ##### Sample Request Body #####
-    # requestBody = {
-    #   "title" => "How to fold fitted sheets?",
-    #   "message_body" => "No matter how hard I try, I just can't figure it out. Fitted sheets are the worst. Please teach me your sorcery?",
-    #   "category_id" => "1",
-    #   "author_id" => "2",
-    #   "post_id" => "3",
-    #   "topic_id" => "4",
-    #   "tags" => ["home","laundry"]
-    # }
     
     def ask requestBody
       request = Net::HTTP::Post.new(askuri, 'Content-Type' => 'application/json')
