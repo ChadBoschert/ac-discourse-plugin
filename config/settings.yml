@@ -1,6 +1,6 @@
 plugins:
   apt_crowd_api_uri:
-    client: false  
+    client: true  
   apt_crowd_api_username:
     client: false
   apt_crowd_api_password:
