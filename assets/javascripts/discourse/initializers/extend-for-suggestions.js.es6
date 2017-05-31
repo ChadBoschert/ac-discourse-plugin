@@ -4,6 +4,7 @@ import showModal from 'discourse/lib/show-modal';
 function suggest_handler(m, t) {
   t.then(function() {
     console.log(document.readyState);
+    console.log(m);
     if (Discourse.User.current().id == m.user_id && (m.apt_crowd_request_seen == null || m.apt_crowd_request_seen == false))   
     {
       if (document.readyState === 'complete') {

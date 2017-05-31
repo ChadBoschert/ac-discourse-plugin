@@ -28,13 +28,13 @@ after_initialize do
       requestBody = {
 	convo_srcid: topic.id.to_s,
         post_srcid: post.id.to_s,
-        subject: topic.title,
-        body: post.raw,
+        subject: topic.title.to_s,
+        body: post.raw.to_s,
         category_srcid: topic.category_id.to_s,
-	category: topic.category.name,
+	category: topic.category.name.to_s,
         author_srcid: topic.user_id.to_s,
-	author_name: topic.user.name,
-	author_email: topic.user.email,
+	author_name: topic.user.name.to_s,
+	author_email: topic.user.email.to_s,
 	post_timestamp_utc: topic.created_at.utc
       } 
 

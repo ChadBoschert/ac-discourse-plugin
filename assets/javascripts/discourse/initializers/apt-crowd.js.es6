@@ -54,7 +54,7 @@ function initializeDetails(api) {
 */
       //const TopicController = api.container.lookupFactory("controller:topic.fromParamsNear");
 
-
+/*
       $(document).ready(function () {
 
         Discourse.Topic.find(743, {}).then(function (model) {
@@ -64,6 +64,7 @@ function initializeDetails(api) {
         });
         
       });
+*/
       
     }
 
