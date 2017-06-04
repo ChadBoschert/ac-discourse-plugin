@@ -1,3 +1,4 @@
+/*
 export default Discourse.Route.extend({
 
   model(params) {
@@ -24,3 +25,4 @@ export default Discourse.Route.extend({
     }
   }
 });
+*/
