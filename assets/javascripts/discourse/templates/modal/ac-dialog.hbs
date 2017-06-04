@@ -12,13 +12,8 @@
           <div class="results-posts">
             {{#each model.apt_crowd_request.response.posts as |post|}}
               <div class="result">  
-                <h3>{{post.subject}}</h3>{{post.score}}
+                <h3>{{post.subject}}</h3>
                 <p>{{{post.preview_html}}}</p>
-		<p>
-                  {{#each post.relevance as |skill|}}
-                    {{skill.term}} ({{skill.score}}){{#unless (eq skill post.relevance.lastObject)}},{{/unless}}
-                  {{/each}}
-                </p>
 		<p>In <em>{{post.category}}</em> by <em>{{post.author_name}}</em></p>
                 {{d-button action="show_post" label="ac_dialog.show_post_label" actionParam=post.post_srcid class="btn btn-primary"}}
               </div>
@@ -32,12 +27,7 @@
               <div class="result">
 		{{avatar current_user imageSize="small"}}
 <!--		<img src="/user_avatar/localhost/chad/45/32.png" width="32" height="32" />-->
-                <h3>{{peer.author_name}}</h3>{{peer.score}}
-                <p>
-                  {{#each peer.relevance as |skill|}}
-                    {{skill.term}} ({{skill.score}}){{#unless (eq skill peer.relevance.lastObject)}},{{/unless}}
-                  {{/each}}
-                </p>
+                <h3>{{peer.author_name}}</h3>
 
                 {{d-button action="show_activity" label="ac_dialog.show_user_activity_label" actionParam=peer.author_srcid class="btn-primary"}}
                 <a {{action "invite_peer" model.id peer.author_srcid}}>Invite to Topic</a>
@@ -51,13 +41,8 @@
             {{#each model.apt_crowd_request.response.vendors as |vendor|}}
               <div class="result">
                 <img src="{{vendor.logo_url}}"/>
-                <h3>{{vendor.company_name}}</h3>{{vendor.score}}
+                <h3>{{vendor.company_name}}</h3>
                 <p>{{vendor.desc}}</p>
-		<p>
-                  {{#each vendor.relevance as |skill|}}
-                    {{skill.term}} ({{skill.score}}){{#unless (eq skill vendor.relevance.lastObject)}},{{/unless}}
-                  {{/each}}
-                </p>
 		<p>{{vendor.contact_name}} ({{vendor.contact_email}}), {{vendor.contact_phone}}</p>
                 <a target="_blank" href="{{vendor.website}}">View Website</a>
               </div>

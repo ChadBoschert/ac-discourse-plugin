@@ -4,14 +4,16 @@ export default Ember.Controller.extend({
   actions: {
     show_post(post_id) { 
       // TODO: Find a better way to route to a post w/o opening a new window
-      window.open('/p/' + post_id);
+      window.open('/p/' + post_id, 'ac-explore');
     },
     show_activity(user_id) {
       console.log(user_id)
+
       ajax("/apt_crowd/lookup-user/" + user_id, {
-        type: "POST", data: { }
+        type: "POST", data: { }, async: false
       }).then(response => {
-        window.open('/u/' + encodeURI(response.user.username) + '/activity'); 
+        var target = '/u/' + encodeURI(response.user.username) + '/activity';
+        window.open(target, 'ac-explore');
       });
     },
     invite_peer(topic_id, user_id) {
