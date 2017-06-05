@@ -22,7 +22,7 @@ after_initialize do
   )
 
   DiscourseEvent.on(:topic_created) do |topic, _, user|
-    if topic.archetype == "regular"
+    if topic.archetype == "regular" and topic.category_id > 4
       post = topic.first_post
   
       requestBody = {
