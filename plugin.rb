@@ -1,6 +1,6 @@
 # name: discourse-apt-crowd
 # about: Integration with apt-crowd api
-# version: 0.0.6
+# version: 0.0.7
 # authors: David Hahn, Chad Boschert
 
 require 'json'

@@ -3,6 +3,8 @@ plugins:
     default: ""
     client: true  
   apt_crowd_api_username:
+    default: ""
     client: false
   apt_crowd_api_password:
+    default: ""
     client: false
