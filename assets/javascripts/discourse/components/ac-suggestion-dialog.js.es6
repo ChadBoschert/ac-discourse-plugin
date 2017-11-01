@@ -24,11 +24,13 @@ export default Ember.Component.extend({
 
     if (this.topic){
       var t = this.topic;
-      Em.run.schedule('afterRender', function() {
-        console.log('afterRender:' + t.id);
-        showModal('ac-dialog', { model: t, title: 'ac_dialog.title'});
-      });
-      //showModal('ac-dialog', { model: model, title: 'ac_dialog.title', onClose: function() { alert('test'); } });
+      
+      if (Discourse.User.current().id == t.user_id && t.apt_crowd_request != null && (t.apt_crowd_request_seen == null || t.apt_crowd_request_seen == false)) {
+        Em.run.schedule('afterRender', function() {
+          console.log('afterRender 5:' + t.id);
+          showModal('ac-dialog', { model: t, title: 'ac_dialog.title'});
+        });
+      }
     }
   },
 
