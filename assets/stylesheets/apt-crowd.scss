@@ -265,3 +265,8 @@ div.bootbox.modal {
     }
   }
 }
+@media screen and (min-width: 475px) {
+  .modal-inner-container {
+    width: 100%;
+  }
+}
