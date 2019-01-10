@@ -7,9 +7,7 @@ require 'json'
 require_relative 'lib/api_wrapper'
 
 register_asset "stylesheets/apt-crowd.scss"
-enabled_site_setting :apt_crowd_api_uri
-enabled_site_setting :apt_crowd_api_username
-enabled_site_setting :apt_crowd_api_password
+enabled_site_setting :apt_crowd_api_enabled
 
 PLUGIN_NAME ||= "apt_crowd".freeze
 
@@ -26,16 +24,16 @@ after_initialize do
       post = topic.first_post
   
       requestBody = {
-	convo_srcid: topic.id.to_s,
+        convo_srcid: topic.id.to_s,
         post_srcid: post.id.to_s,
         subject: topic.title.to_s,
         body: post.raw.to_s,
         category_srcid: topic.category_id.to_s,
-	category: topic.category.name.to_s,
+        category: topic.category.name.to_s,
         author_srcid: topic.user_id.to_s,
-	author_name: topic.user.name.to_s,
-	author_email: topic.user.email.to_s,
-	post_timestamp_utc: topic.created_at.utc
+        author_name: topic.user.name.to_s,
+        author_email: topic.user.primary_email.email.to_s,
+        post_timestamp_utc: topic.created_at.utc
       } 
 
       topic.meta_data[:apt_crowd_request] = aptCrowdApi.ask(requestBody)
